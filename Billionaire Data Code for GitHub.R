@@ -69,7 +69,7 @@ ggplot(avg_networth, aes(x = GDP, y = avg_networth)) +
   scale_y_continuous(labels = label_dollar()) + # Adding dollar symbol to y-axis
   theme_minimal()
 
-#Checking for non-Finite Values in GDP and avg_networth
+#Checking for non-finite Values in GDP and avg_networth
 avg_networth %>%
   filter(!is.finite(GDP) | !is.finite(avg_networth))
 
@@ -99,14 +99,14 @@ avg_networth_clean <- avg_networth %>%
 #Scaling GDP to billions for better readability
 avg_networth_clean$GDP_scaled <- avg_networth_clean$GDP / 1e9  # Scaling GDP to billions
 
-#Creating the plot with scaled GDP values
+#Creating the plot with scaled Gdp values for better readability
 ggplot(avg_networth_clean, aes(x = GDP_scaled, y = avg_networth)) +
   geom_point() +
-  geom_smooth(method = "lm", se = FALSE, color = "blue") +
+  geom_smooth(method = "lm", se = FALSE, color = "orange") +
   labs(title = "Correlation between average networth of billionaires from a country and the country's GDP",
        x = "GDP ($)",
        y = "Average networth of billionaires from a country ($)") +
-  scale_x_continuous(labels = label_dollar(scale = 1, suffix = "B")) +  # Format x-axis labels in billions
+  scale_x_continuous(labels = label_dollar(scale = 1, suffix = "Bill")) +  # Formating x-axis labels in billions
   scale_y_continuous(labels = label_dollar()) + # Adding dollar symbol to y-axis
   theme_minimal()
 
@@ -128,13 +128,13 @@ summary(avg_networth$avg_networth)
 
 #Plotting histogram of dependent variable with density curve
 ggplot(avg_networth, aes(x = avg_networth)) +
-  geom_histogram(binwidth = 1500, fill = "skyblue", color = "black") +
+  geom_histogram(binwidth = 1500, fill = "gold", color = "black") +
   stat_function(fun = function(x) {
     dnorm(x, mean = mean(avg_networth$avg_networth, na.rm = TRUE), 
           sd = sd(avg_networth$avg_networth, na.rm = TRUE)) * 
-      nrow(avg_networth) * 500  # Scale to counts
+      nrow(avg_networth) * 500  # Scaling to counts
   }, 
-  color = "red") +
+  color = "pink") +
   labs(title = "Distribution of average networth of billionaires from a country", 
        x = "Average networth of billionaires from a country ($)", 
        y = "Frequency") +
