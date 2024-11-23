@@ -152,7 +152,7 @@ spearman_test <- cor.test(
 spearman_test
 
 #Plotting scatterplot before log transformation
-plot_before <- ggplot(avg_networth_clean, aes(x = GDP, y = avg_networth)) +
+normal_plot <- ggplot(avg_networth_clean, aes(x = GDP, y = avg_networth)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE, color = "blue") +
   labs(title = "Scatterplot Before Log Transformation",
@@ -167,7 +167,7 @@ install.packages("patchwork")
 library(patchwork)
 
 #Plotting scatterplot after log transformation
-plot_after <- ggplot(avg_networth_clean, aes(x = GDP, y = avg_networth)) +
+log_plot <- ggplot(avg_networth_clean, aes(x = GDP, y = avg_networth)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE, color = "blue") +
   scale_x_log10(labels = scales::label_dollar(scale_cut = scales::cut_short_scale())) +
@@ -178,7 +178,7 @@ plot_after <- ggplot(avg_networth_clean, aes(x = GDP, y = avg_networth)) +
   theme_minimal()
 
 #Combining the plots side by side
-plot_before + plot_after
+normal_plot + log_plot
 
 
 
