@@ -58,15 +58,15 @@ billionaires_data %>%
 summary(billionaires_data$gdp_country)
 
 
-#adding relevant unit for x axis scale values, and making the values readable
+#adding relevant units for x axis scale value, and making the values understandable 
 ggplot(avg_networth, aes(x = GDP, y = avg_networth)) +
   geom_point() +
-  geom_smooth(method = "lm", se = FALSE, color = "blue") +
+  geom_smooth(method = "lm", se = FALSE, color = "Green") +
   labs(title = "Correlation between average networth of billionaires from a country and the country's GDP",
        x = "GDP ($)",
        y = "Average networth of billionaires from a country ($)") +
-  scale_x_continuous(labels = label_dollar()) + # Adding dollar symbol to x-axis
-  scale_y_continuous(labels = label_dollar()) + # Adding dollar symbol to y-axis
+  scale_x_continuous(labels = label_dollar()) + # Adding dollar symbol to x-axis units
+  scale_y_continuous(labels = label_dollar()) + # Adding dollar symbol to y-axis units
   theme_minimal()
 
 #Checking for non-finite Values in GDP and avg_networth
@@ -92,7 +92,7 @@ ggplot(avg_networth, aes(x = GDP, y = avg_networth)) +
   scale_y_continuous(labels = label_dollar()) + # Adding dollar symbol to y-axis
   theme_minimal()
 
-#filtering out any missing values
+#filtering out any missing values in the dataset
 avg_networth_clean <- avg_networth %>%
   filter(!is.na(GDP) & !is.na(avg_networth) & is.finite(GDP) & is.finite(avg_networth))
 
@@ -123,7 +123,7 @@ ggplot(avg_networth_clean, aes(x = GDP, y = avg_networth)) +
        y = "Average networth of billionaires from a country ($)") +
   theme_minimal()
 
-#statistics of avg networth of billionaires from a country
+#statistics of avg networth of billionaires from a country to find min and max value of the feature
 summary(avg_networth$avg_networth)
 
 #Plotting histogram of dependent variable with density curve
