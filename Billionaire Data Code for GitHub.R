@@ -23,10 +23,10 @@ cleaned_data <- billionaires_data %>%
   filter(!is.na(gdp_country))
 nrow(cleaned_data)
 
-#Checking data type of gdp_country column
+#Checking data type of gdp_country feature
 class(billionaires_data$gdp_country)
 
-#Checking data type of finalworth column
+#Checking data type of finalworth feature
 class(billionaires_data$finalWorth)
 
 # Filter the dataset for each country and compute the average net worth of billionaires from that country
@@ -42,8 +42,8 @@ library(scales) # For label_dollar()
 
 #plotting the correlation between the dependent and independent variable
 ggplot(avg_networth, aes(x = GDP, y = avg_networth)) +
-  geom_point() +
-  geom_smooth(method = "lm", se = FALSE, color = "blue") +
+  geom_point()+
+  geom_smooth(method = "lm", se = FALSE, color = "cyan") +
   labs(title = "Correlation between Average Net Worth and GDP",
        x = "GDP",
        y = "Average Net Worth") +
@@ -69,7 +69,7 @@ ggplot(avg_networth, aes(x = GDP, y = avg_networth)) +
   scale_y_continuous(labels = label_dollar()) + # Adding dollar symbol to y-axis units
   theme_minimal()
 
-#Checking for non-finite Values in GDP and avg_networth
+#Checking for non-finite Values in GDP and avg_networth since we don't want such values to be considered
 avg_networth %>%
   filter(!is.finite(GDP) | !is.finite(avg_networth))
 
